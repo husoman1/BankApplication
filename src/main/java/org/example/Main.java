@@ -8,6 +8,8 @@ public class Main {
         // IntelliJ IDEA suggests fixing it.
         System.out.print("Test!");
 
+        System.out.println("first change");
+
         // Press Ctrl+R or click the green arrow button in the gutter to run the code.
 
     }
