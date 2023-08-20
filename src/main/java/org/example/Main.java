@@ -10,6 +10,8 @@ public class Main {
 
         System.out.println("first change");
 
+        System.out.println("second change");
+
         // Press Ctrl+R or click the green arrow button in the gutter to run the code.
 
     }
