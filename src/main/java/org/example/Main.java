@@ -1,7 +1,12 @@
 package org.example;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 import java.util.logging.FileHandler;
 import java.util.logging.Logger;
@@ -12,9 +17,13 @@ import java.util.logging.SimpleFormatter;
 public class Main {
 
     public static void main(String[] args) {
-        LoggerCustom log = new LoggerCustom();
         int input1;
         Menu menu = new Menu();
+
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            Customer[] acc1 = mapper.readValue(new File("/Users/huseyineraslan/IdeaProjects/BankApplication/src/main/java/org/example/inputJSON"), Customer[].class);
+            System.out.println(acc1[0].customerID);
 
 
 
@@ -22,22 +31,27 @@ public class Main {
         input1 = initApp();
         switch(input1) {
             case 1 :
-                Account acc1 = new Account();
-                boolean result = acc1.getCredentials();
-                if (result) {
-                    menu.accountSummary(acc1);
+                Customer cus = new Customer();
+
+                int resultIndex = cus.getCredentials(acc1);
+                if (resultIndex>=0) {
+                    menu.accountSummary(acc1[resultIndex]);
                 }
                 else {
                     System.out.println("Fail!");
                 }
                 break;
             case 2 :
-                menu.createAccount();
+                //menu.createAccount();
                 main(args);
                 break;
             default :
                 System.out.println("Wrong!");
                 break;
+        }
+        }
+        catch (IOException e) {
+            e.printStackTrace();
         }
     }
     public static int initApp(){

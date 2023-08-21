@@ -8,6 +8,9 @@ public class Account {
     String customerPassword;
     Double sum;
 
+    String name;
+    String surname;
+
     Map<String, String> map = new HashMap<String, String>();
     Map<String, Double> accountInfo = new HashMap<String, Double>();
 
@@ -63,5 +66,45 @@ public class Account {
 
     public void setSum(Double sum) {
         this.sum = sum;
+    }
+
+    public Account(String customerID, String customerPassword, Double sum, String name, String surname) {
+        this.customerID = customerID;
+        this.customerPassword = customerPassword;
+        this.sum = sum;
+        this.name = name;
+        this.surname = surname;
+    }
+
+    public String getCustomerID() {
+        return customerID;
+    }
+
+    public void setCustomerID(String customerID) {
+        this.customerID = customerID;
+    }
+
+    public String getCustomerPassword() {
+        return customerPassword;
+    }
+
+    public void setCustomerPassword(String customerPassword) {
+        this.customerPassword = customerPassword;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
     }
 }

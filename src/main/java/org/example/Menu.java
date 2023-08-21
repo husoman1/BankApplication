@@ -9,7 +9,7 @@ public class Menu {
         System.out.println("1.Login your account");
         System.out.println("2.Create New Account");
     }
-    public void accountSummary(Account acc){
+    public void accountSummary(Customer acc){
         System.out.println("Login Successful");
         System.out.println("Your sum is " + acc.getSum());
         System.out.println("Please select next action");
@@ -22,7 +22,7 @@ public class Menu {
             case 1 :
                 System.out.println("Please enter Amount");
                 double amount = scn1.nextDouble();
-                act.depoitMoney(acc,amount);
+                act.depositMoney(acc,amount);
                 break;
             case 2 :
                 System.out.println("Please enter Amount");
@@ -35,7 +35,7 @@ public class Menu {
         }
     }
 
-    public void createAccount(){
+    public void createAccount(Customer[] cuss1){
         Scanner scn1 = new Scanner(System.in);
         System.out.println("Please enter an ID");
         String id = scn1.nextLine();
@@ -43,9 +43,9 @@ public class Menu {
         String pw = scn1.nextLine();
         System.out.println("Please select amount to deposit");
         Double amount = scn1.nextDouble();
-        Account acc = new Account();
-        boolean result = acc.createAccount(id,pw,amount);
-        if (!result){
+        Customer cus = new Customer();
+        int result = cus.createAccount(id,pw,amount,cuss1);
+        if (result<0){
             System.out.println("Already exist username");
         }
         else {
