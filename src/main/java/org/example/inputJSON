@@ -1,0 +1,13 @@
+{"users": [{
+  "userid" : "husoman",
+  "userpw":"pw123",
+  "amount": "200.00",
+  "name": "Huseyin",
+  "surname": "Eraslan"},
+  {
+  "userid" : "espard",
+  "userpw":"pw1234",
+  "amount": "300.00",
+  "name": "Nihatcan",
+  "surname": "Yavuz"}]
+}
