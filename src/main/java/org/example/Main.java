@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
@@ -22,10 +23,11 @@ public class Main {
 
         ObjectMapper mapper = new ObjectMapper();
         try {
-            Customer[] acc1 = mapper.readValue(new File("/Users/nihatyavuz/Desktop/java/BankApplication/src/main/java/org/example/inputJSON"), Customer[].class);
+            //Customer[] acc1 = mapper.readValue(new File("/Users/huseyineraslan/IdeaProjects/BankApplication/src/main/java/org/example/inputJSON"), Customer[].class);
+            ArrayList<Customer> acc1 = mapper.readValue(new File("src/main/java/org/example/inputJSON"), mapper.getTypeFactory().constructCollectionType(List.class, Customer.class));
+            //System.out.println("myObjects-->"+myObjects.get(0).customerID);
 
-
-        // Burayı Interface yapalım sonrasında
+            // Burayı Interface yapalım sonrasında
         input1 = initApp();
         switch(input1) {
             case 1 :
@@ -33,7 +35,7 @@ public class Main {
 
                 int resultIndex = cus.getCredentials(acc1);
                 if (resultIndex>=0) {
-                    menu.accountSummary(acc1[resultIndex]);
+                    menu.accountSummary(acc1.get(resultIndex));
                 }
                 else {
                     System.out.println("Fail!");
@@ -42,6 +44,12 @@ public class Main {
             case 2 :
                 menu.createAccount(acc1);
                 main(args);
+                break;
+            case 3 :
+                JSON jsonob = new JSON();
+                jsonob.prepareOutJSON(acc1);
+                //menu.createAccount(acc1);
+                //main(args);
                 break;
             default :
                 System.out.println("Wrong!");

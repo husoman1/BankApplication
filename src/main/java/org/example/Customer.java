@@ -1,6 +1,7 @@
 package org.example;
 
 import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.Scanner;
@@ -54,7 +55,7 @@ public class Customer {
         this.surname = surname;
     }
 
-    public int getCredentials(Customer[] cust1){
+    public int getCredentials(ArrayList<Customer> cust1){
         System.out.println("Customer ID Please");
         Scanner scn1 = new Scanner(System.in);
         String input1 = scn1.nextLine();
@@ -63,14 +64,14 @@ public class Customer {
         return loginAccount(input1,input2, cust1);
     }
 
-    public int loginAccount(String ID,String customerPW, Customer[] cust1){
-        for (int i = 0; i < cust1.length; i++) {
-            if (cust1[i].customerID.equals(ID) && cust1[i].customerPassword.equals(customerPW)){
-                this.customerID = cust1[i].customerID;
-                this.customerPassword = cust1[i].customerPassword;
-                this.sum = cust1[i].sum;
-                this.name = cust1[i].name;
-                this.surname = cust1[i].surname;
+    public int loginAccount(String ID,String customerPW, ArrayList<Customer> cust1){
+        for (int i = 0; i < cust1.size(); i++) {
+            if (cust1.get(i).customerID.equals(ID) && cust1.get(i).customerPassword.equals(customerPW)){
+                this.customerID = cust1.get(i).customerID;
+                this.customerPassword = cust1.get(i).customerPassword;
+                this.sum = cust1.get(i).sum;
+                this.name = cust1.get(i).name;
+                this.surname = cust1.get(i).surname;
 
                 return i;
             }
@@ -78,9 +79,9 @@ public class Customer {
         return -1;
     }
 
-    public int createAccount(String id,String pw,Double amount,Customer[] cus){
-        for (int i = 0; i < cus.length; i++) {
-            if (cus[i].customerID.equals(id)){
+    public int createAccount(String id,String pw,Double amount,ArrayList<Customer> cus){
+        for (int i = 0; i < cus.size(); i++) {
+            if (cus.get(i).customerID.equals(id)){
                 return -1;
             }
         }
@@ -91,12 +92,11 @@ public class Customer {
         this.name = null;
         this.surname = null;
 
-        Customer[] custTemp = Arrays.copyOf(cus, cus.length+1);
+        cus.add(this);
+        System.out.println(cus.get(1).customerID);
+        System.out.println(cus.get(1).customerPassword);
 
-        custTemp[cus.length-1].customerID = id;
-        custTemp[cus.length-1].customerPassword = pw;
-        custTemp[cus.length-1].sum = amount;
 
-        return custTemp.length-1;
+        return 0;
     }
 }

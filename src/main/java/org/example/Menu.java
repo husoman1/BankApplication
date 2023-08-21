@@ -1,5 +1,6 @@
 package org.example;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Menu {
@@ -8,6 +9,7 @@ public class Menu {
         System.out.println("Please select options");
         System.out.println("1.Login your account");
         System.out.println("2.Create New Account");
+        System.out.println("3.Prepare Out JSON");
     }
     public void accountSummary(Customer acc){
         System.out.println("Login Successful");
@@ -35,7 +37,7 @@ public class Menu {
         }
     }
 
-    public void createAccount(Customer[] cuss1){
+    public void createAccount(ArrayList<Customer> cuss1){
         Scanner scn1 = new Scanner(System.in);
         System.out.println("Please enter an ID");
         String id = scn1.nextLine();
