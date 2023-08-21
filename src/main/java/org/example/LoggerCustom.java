@@ -5,9 +5,12 @@ import java.util.logging.FileHandler;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 
+import static java.util.logging.Logger.getLogger;
+
 public class LoggerCustom {
+    Logger logger = getLogger("MyLog");
     public LoggerCustom() {
-            Logger logger = java.util.logging.Logger.getLogger("MyLog");
+
             FileHandler fh;
             try {
                 fh = new FileHandler("/Users/huseyineraslan/IdeaProjects/BankApplication/src/main/java/org/example/log");
@@ -21,6 +24,10 @@ public class LoggerCustom {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+    }
+
+    public void log(String msg){
+        logger.info(msg);
     }
 
 }
