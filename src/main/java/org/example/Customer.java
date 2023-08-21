@@ -1,5 +1,7 @@
 package org.example;
 
+import java.lang.reflect.Array;
+import java.util.Arrays;
 import java.util.Objects;
 import java.util.Scanner;
 
@@ -61,7 +63,7 @@ public class Customer {
         return loginAccount(input1,input2, cust1);
     }
 
-    public int loginAccount(String ID,String customerPW,Customer[] cust1){
+    public int loginAccount(String ID,String customerPW, Customer[] cust1){
         for (int i = 0; i < cust1.length; i++) {
             if (cust1[i].customerID.equals(ID) && cust1[i].customerPassword.equals(customerPW)){
                 this.customerID = cust1[i].customerID;
@@ -79,17 +81,22 @@ public class Customer {
     public int createAccount(String id,String pw,Double amount,Customer[] cus){
         for (int i = 0; i < cus.length; i++) {
             if (cus[i].customerID.equals(id)){
-                this.customerID = id;
-                this.customerPassword = pw;
-                this.sum = amount;
-                this.name = null;
-                this.surname = null;
-                cus[cus.length].customerID = id;
-                cus[cus.length].customerPassword = pw;
-                cus[cus.length].sum = amount;
-                return cus.length;
+                return -1;
             }
         }
-        return -1;
+
+        this.customerID = id;
+        this.customerPassword = pw;
+        this.sum = amount;
+        this.name = null;
+        this.surname = null;
+
+        Customer[] custTemp = Arrays.copyOf(cus, cus.length+1);
+
+        custTemp[cus.length-1].customerID = id;
+        custTemp[cus.length-1].customerPassword = pw;
+        custTemp[cus.length-1].sum = amount;
+
+        return custTemp.length-1;
     }
 }

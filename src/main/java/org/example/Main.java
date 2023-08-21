@@ -22,9 +22,7 @@ public class Main {
 
         ObjectMapper mapper = new ObjectMapper();
         try {
-            Customer[] acc1 = mapper.readValue(new File("/Users/huseyineraslan/IdeaProjects/BankApplication/src/main/java/org/example/inputJSON"), Customer[].class);
-            System.out.println(acc1[0].customerID);
-
+            Customer[] acc1 = mapper.readValue(new File("/Users/nihatyavuz/Desktop/java/BankApplication/src/main/java/org/example/inputJSON"), Customer[].class);
 
 
         // Burayı Interface yapalım sonrasında
@@ -42,7 +40,7 @@ public class Main {
                 }
                 break;
             case 2 :
-                //menu.createAccount();
+                menu.createAccount(acc1);
                 main(args);
                 break;
             default :
