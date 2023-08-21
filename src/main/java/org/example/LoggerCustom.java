@@ -1,0 +1,26 @@
+package org.example;
+
+import java.io.IOException;
+import java.util.logging.FileHandler;
+import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
+
+public class LoggerCustom {
+    public LoggerCustom() {
+            Logger logger = java.util.logging.Logger.getLogger("MyLog");
+            FileHandler fh;
+            try {
+                fh = new FileHandler("/Users/huseyineraslan/IdeaProjects/BankApplication/src/main/java/org/example/log");
+                logger.addHandler(fh);
+                SimpleFormatter formatter = new SimpleFormatter();
+                fh.setFormatter(formatter);
+                logger.info("My first log");
+            }
+            catch (SecurityException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+    }
+
+}
