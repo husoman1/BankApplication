@@ -18,11 +18,10 @@ import java.util.logging.SimpleFormatter;
 public class Main {
 
     public static void main(String[] args) {
-        Menu menu = new Menu();
 
         ArrayList<Customer> acc1 =processJSON(); // Process InputJSON as DB
-        int input1 = initApp(); //APP Menu init
 
+        int input1 = initApp(); //APP Menu init
         appFlow(input1,acc1); // APP init
     }
     public static ArrayList<Customer> processJSON(){
