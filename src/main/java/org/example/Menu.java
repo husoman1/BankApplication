@@ -37,7 +37,7 @@ public class Menu {
         }
     }
 
-    public void createAccount(ArrayList<Customer> cuss1){
+    public Customer createAccount(ArrayList<Customer> cuss1){
         Scanner scn1 = new Scanner(System.in);
         System.out.println("Please enter an ID");
         String id = scn1.nextLine();
@@ -46,12 +46,14 @@ public class Menu {
         System.out.println("Please select amount to deposit");
         Double amount = scn1.nextDouble();
         Customer cus = new Customer();
-        int result = cus.createAccount(id,pw,amount,cuss1);
-        if (result<0){
+        Customer result = cus.createAccount(id,pw,amount,cuss1);
+        if (result.customerID == null){
             System.out.println("Already exist username");
+            return null;
         }
         else {
             System.out.println("User succesfully created");
+            return cus;
         }
     }
 

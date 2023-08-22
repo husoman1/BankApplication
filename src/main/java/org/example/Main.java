@@ -21,14 +21,30 @@ public class Main {
         int input1;
         Menu menu = new Menu();
 
+        ArrayList<Customer> acc1 =processJSON();
+        input1 = initApp();
+        appFlow(input1,acc1);
+    }
+    public static ArrayList<Customer> processJSON(){
         ObjectMapper mapper = new ObjectMapper();
         try {
-            //Customer[] acc1 = mapper.readValue(new File("/Users/huseyineraslan/IdeaProjects/BankApplication/src/main/java/org/example/inputJSON"), Customer[].class);
-            ArrayList<Customer> acc1 = mapper.readValue(new File("src/main/java/org/example/inputJSON"), mapper.getTypeFactory().constructCollectionType(List.class, Customer.class));
-            //System.out.println("myObjects-->"+myObjects.get(0).customerID);
+        return mapper.readValue(new File("src/main/java/org/example/inputJSON"), mapper.getTypeFactory().constructCollectionType(List.class, Customer.class));
+        }
+        catch (IOException e) {
+        e.printStackTrace();
+        return null;
+    }
+    }
+    public static int initApp(){
+        Menu menu = new Menu();
+        menu.initialMessage();
+        Scanner scn1 = new Scanner(System.in);
+        return scn1.nextInt();
 
-            // Burayı Interface yapalım sonrasında
-        input1 = initApp();
+    }
+
+    public static void appFlow(int input1,ArrayList<Customer> acc1){
+        Menu menu = new Menu();
         switch(input1) {
             case 1 :
                 Customer cus = new Customer();
@@ -42,8 +58,9 @@ public class Main {
                 }
                 break;
             case 2 :
-                menu.createAccount(acc1);
-                main(args);
+                Customer cus1 =  menu.createAccount(acc1);
+                acc1.add(cus1);
+                appFlow(initApp(),acc1);
                 break;
             case 3 :
                 JSON jsonob = new JSON();
@@ -55,16 +72,6 @@ public class Main {
                 System.out.println("Wrong!");
                 break;
         }
-        }
-        catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-    public static int initApp(){
-        Menu menu = new Menu();
-        menu.initialMessage();
-        Scanner scn1 = new Scanner(System.in);
-        return scn1.nextInt();
     }
 
 }

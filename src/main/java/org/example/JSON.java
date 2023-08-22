@@ -14,6 +14,11 @@ public class JSON {
         objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
 
         try {
+            System.out.println(cus.size());
+            for (int i = 0; i < cus.size(); i++) {
+                System.out.println(cus.get(i).customerID);
+
+            }
             objectMapper.writeValue(new File("src/main/java/org/example/outputJSON"), cus);
         } catch (IOException e) {
             e.printStackTrace();

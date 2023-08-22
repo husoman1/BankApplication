@@ -79,10 +79,10 @@ public class Customer {
         return -1;
     }
 
-    public int createAccount(String id,String pw,Double amount,ArrayList<Customer> cus){
+    public Customer createAccount(String id,String pw,Double amount,ArrayList<Customer> cus){
         for (int i = 0; i < cus.size(); i++) {
             if (cus.get(i).customerID.equals(id)){
-                return -1;
+                return null;
             }
         }
 
@@ -92,11 +92,15 @@ public class Customer {
         this.name = null;
         this.surname = null;
 
-        cus.add(this);
-        System.out.println(cus.get(1).customerID);
-        System.out.println(cus.get(1).customerPassword);
+        //cus.add(this);
+        //System.out.println(cus.get(1).customerID);
+        //System.out.println(cus.get(1).customerPassword);
 
 
-        return 0;
+        return this;
+    }
+
+    public void addAccountToArrayList(){
+        System.out.println(this.customerID);
     }
 }
