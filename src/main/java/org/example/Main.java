@@ -18,12 +18,12 @@ import java.util.logging.SimpleFormatter;
 public class Main {
 
     public static void main(String[] args) {
-        int input1;
         Menu menu = new Menu();
 
-        ArrayList<Customer> acc1 =processJSON();
-        input1 = initApp();
-        appFlow(input1,acc1);
+        ArrayList<Customer> acc1 =processJSON(); // Process InputJSON as DB
+        int input1 = initApp(); //APP Menu init
+
+        appFlow(input1,acc1); // APP init
     }
     public static ArrayList<Customer> processJSON(){
         ObjectMapper mapper = new ObjectMapper();
