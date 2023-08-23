@@ -1,0 +1,15 @@
+{
+  "instance" : [ {
+    "customerID" : "husoman",
+    "customerPassword" : "pw123",
+    "sum" : 200.0,
+    "name" : "Huseyin",
+    "surname" : "Eraslan"
+  }, {
+    "customerID" : "Espard",
+    "customerPassword" : "123123",
+    "sum" : 100000.0,
+    "name" : null,
+    "surname" : null
+  } ]
+}

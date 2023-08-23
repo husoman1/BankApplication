@@ -1,4 +1,4 @@
-package org.example;
+package domain;
 
 public class Actions {
     public void depositMoney(Customer acc,Double amount){

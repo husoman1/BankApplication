@@ -1,14 +1,10 @@
-package org.example;
+package domain;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Objects;
 import java.util.Scanner;
 
 public class Customer {
     String customerID;
-
+    String customerUID;
     String customerPassword;
     Double sum;
 
@@ -55,23 +51,23 @@ public class Customer {
         this.surname = surname;
     }
 
-    public int getCredentials(ArrayList<Customer> cust1){
+    public int getCredentials(Database cust1){
         System.out.println("Customer ID Please");
         Scanner scn1 = new Scanner(System.in);
         String input1 = scn1.nextLine();
         System.out.println("Customer PW Please");
         String input2 = scn1.nextLine();
-        return loginAccount(input1,input2, cust1);
+        return loginAccount(input1, input2, cust1);
     }
 
-    public int loginAccount(String ID,String customerPW, ArrayList<Customer> cust1){
-        for (int i = 0; i < cust1.size(); i++) {
-            if (cust1.get(i).customerID.equals(ID) && cust1.get(i).customerPassword.equals(customerPW)){
-                this.customerID = cust1.get(i).customerID;
-                this.customerPassword = cust1.get(i).customerPassword;
-                this.sum = cust1.get(i).sum;
-                this.name = cust1.get(i).name;
-                this.surname = cust1.get(i).surname;
+    public int loginAccount(String ID, String customerPW, Database cust1){
+        for (int i = 0; i < cust1.instance.size(); i++) {
+            if (cust1.instance.get(i).customerID.equals(ID) && cust1.instance.get(i).customerPassword.equals(customerPW)){
+                this.customerID = cust1.instance.get(i).customerID;
+                this.customerPassword = cust1.instance.get(i).customerPassword;
+                this.sum = cust1.instance.get(i).sum;
+                this.name = cust1.instance.get(i).name;
+                this.surname = cust1.instance.get(i).surname;
 
                 return i;
             }
@@ -79,9 +75,9 @@ public class Customer {
         return -1;
     }
 
-    public Customer createAccount(String id,String pw,Double amount,ArrayList<Customer> cus){
-        for (int i = 0; i < cus.size(); i++) {
-            if (cus.get(i).customerID.equals(id)){
+    public Customer createAccount(String uid, String id, String pw, Double amount, Database cus){
+        for (int i = 0; i < cus.instance.size(); i++) {
+            if (cus.instance.get(i).customerID.equals(id)){
                 return null;
             }
         }
@@ -89,6 +85,7 @@ public class Customer {
         this.customerID = id;
         this.customerPassword = pw;
         this.sum = amount;
+        this.customerUID =
         this.name = null;
         this.surname = null;
 
