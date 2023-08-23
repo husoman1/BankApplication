@@ -51,43 +51,59 @@ public class Customer {
         this.surname = surname;
     }
 
-    public int getCredentials(Database cust1){
-        System.out.println("Customer ID Please");
+    public int getCredentials(Database db){
+        System.out.println("------------------------------------");
+        System.out.print("Username: ");
         Scanner scn1 = new Scanner(System.in);
-        String input1 = scn1.nextLine();
-        System.out.println("Customer PW Please");
-        String input2 = scn1.nextLine();
-        return loginAccount(input1, input2, cust1);
+        String custID = scn1.nextLine();
+        System.out.print("Password: ");
+        String custPW = scn1.nextLine();
+        return loginAccount(custID, custPW, db);
     }
 
-    public int loginAccount(String ID, String customerPW, Database cust1){
-        for (int i = 0; i < cust1.instance.size(); i++) {
-            if (cust1.instance.get(i).customerID.equals(ID) && cust1.instance.get(i).customerPassword.equals(customerPW)){
-                this.customerID = cust1.instance.get(i).customerID;
-                this.customerPassword = cust1.instance.get(i).customerPassword;
-                this.sum = cust1.instance.get(i).sum;
-                this.name = cust1.instance.get(i).name;
-                this.surname = cust1.instance.get(i).surname;
+    public int loginAccount(String ID, String customerPW, Database db){
+        for (int i = 0; i < db.instance.size(); i++) {
+            if (db.instance.get(i).customerID.equals(ID) && db.instance.get(i).customerPassword.equals(customerPW)){
 
-                return i;
+                return getIndex(db, i);
             }
         }
         return -1;
     }
 
-    public Customer createAccount(String uid, String id, String pw, Double amount, Database cus){
-        for (int i = 0; i < cus.instance.size(); i++) {
-            if (cus.instance.get(i).customerID.equals(id)){
+    public int getAccountIndexByUsername(String username, Database db){
+        for (int i = 0; i < db.instance.size(); i++) {
+            if (db.instance.get(i).customerID.equals(username)){
+
+                return getIndex(db, i);
+            }
+        }
+        return -1;
+    }
+
+    private int getIndex(Database db, int i) {
+        this.customerID         = db.instance.get(i).customerID;
+        this.customerPassword   = db.instance.get(i).customerPassword;
+        this.sum                = db.instance.get(i).sum;
+        this.name               = db.instance.get(i).name;
+        this.surname            = db.instance.get(i).surname;
+
+        return i;
+    }
+
+    public Customer createAccount(String uid, String id, String pw, Double amount, Database db){
+        for (int i = 0; i < db.instance.size(); i++) {
+            if (db.instance.get(i).customerID.equals(id)){
                 return null;
             }
         }
 
-        this.customerID = id;
-        this.customerPassword = pw;
-        this.sum = amount;
-        this.customerUID =
-        this.name = null;
-        this.surname = null;
+        this.customerID         = id;
+        this.customerPassword   = pw;
+        this.sum                = amount;
+        this.customerUID        = uid;
+        this.name               = null;
+        this.surname            = null;
 
         //cus.add(this);
         //System.out.println(cus.get(1).customerID);
@@ -101,3 +117,4 @@ public class Customer {
         System.out.println(this.customerID);
     }
 }
+

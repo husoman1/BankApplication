@@ -1,6 +1,16 @@
-[{
-  "customerID" : "husoman",
-  "customerPassword":"pw123",
-  "sum": 200.00,
-  "name": "Huseyin",
-  "surname": "Eraslan"}]
+[
+    {
+      "customerID" : "husoman",
+      "customerPassword":"pw123",
+      "sum": 200.00,
+      "name": "Huseyin",
+      "surname": "Eraslan"
+    },
+    {
+      "customerID" : "espard",
+      "customerPassword" : "123123",
+      "sum" : 100000.0,
+      "name" : null,
+      "surname" : null
+    }
+]

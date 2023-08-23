@@ -13,62 +13,118 @@ public class Menu {
         return scn1.nextInt();
     }
 
-    public static void appFlow(int input1, Database acc){
+    public static void appFlow(int selection, Database db){
         Menu menu = new Menu();
-        switch (input1) {
+        switch (selection) {
             case 1 -> {
-                Customer cus = new Customer();
-                int resultIndex = cus.getCredentials(acc);
+                Customer customer = new Customer();
+                int resultIndex = customer.getCredentials(db);
                 if (resultIndex >= 0) {
-                    menu.accountSummary(acc.instance.get(resultIndex));
+                    menu.accountSummary(db.instance.get(resultIndex), db);
                 } else {
-                    System.out.println("Fail!");
+                    System.out.println("Username or Password is wrong!");
+                    appFlow(initApp(), db);
                 }
             }
             case 2 -> {
-                Customer cus1 = menu.createAccount(acc);
-                acc.instance.add(cus1);
-                appFlow(initApp(), acc);
+                Customer customer = menu.createAccount(db);
+                db.instance.add(customer);
+                appFlow(initApp(), db);
             }
             case 3 -> {
-                Json jsonob = new Json();
-                jsonob.prepareOutJSON(acc);
+                Json jsonobj = new Json();
+                jsonobj.prepareOutJSON(db);
             }
-            default -> System.out.println("Wrong!");
+            default -> {
+                System.out.println("Please select a valid menu item");
+                appFlow(initApp(), db);
+            }
         }
     }
 
     public void initialMessage(){
-        System.out.println("Welcome the First Bank Application!");
-        System.out.println("Please select options");
-        System.out.println("1.Login your account");
-        System.out.println("2.Create New Account");
-        System.out.println("3.Prepare Out JSON");
+        System.out.println("------------------------------------");
+        System.out.println("|       Welcome the First Bank      |");
+        System.out.println("------------------------------------");
+        System.out.println("|       Please select an option     |");
+        System.out.println("|   1.Login                         |");
+        System.out.println("|   2.Create New Account            |");
+        System.out.println("|   3.Prepare Out JSON              |");
+        System.out.println("------------------------------------");
+        System.out.print(  "    Selection:");
     }
-    public void accountSummary(Customer acc){
-        System.out.println("Login Successful");
-        System.out.println("Your sum is " + acc.getSum());
-        System.out.println("Please select next action");
-        System.out.println("1.Deposit Money");
-        System.out.println("2.Withdraw Money");
+    public void accountSummary(Customer acc, Database db){
+        System.out.println("=====================================");
+        System.out.println("    Your Balance: " + acc.getSum());
+        System.out.println("=====================================");
+        System.out.println("                  *                  ");
+        System.out.println("------------------------------------");
+        System.out.println("|       Please select an option     |");
+        System.out.println("------------------------------------");
+        System.out.println("|   1.Deposit Money                 |");
+        System.out.println("|   2.Withdraw Money                |");
+        System.out.println("|   3.Transfer Money                |");
+        System.out.println("|   4.Log Out                       |");
+        System.out.println("------------------------------------");
+        System.out.print(  "    Selection:");
         Actions act = new Actions();
         Scanner scn1 = new Scanner(System.in);
         int input1 = scn1.nextInt();
-        switch(input1) {
-            case 1 :
+        switch (input1) {
+            case 1 -> {
+                System.out.println();
+                System.out.println("------------------------------------");
                 System.out.println("Please enter Amount");
+                System.out.println("------------------------------------");
+                System.out.print("Amount:");
                 double amount = scn1.nextDouble();
-                act.depositMoney(acc,amount);
-                break;
-            case 2 :
+                act.depositMoney(acc, amount);
+
+                accountSummary(acc,db);
+            }
+            case 2 -> {
+                System.out.println();
+                System.out.println("------------------------------------");
                 System.out.println("Please enter Amount");
+                System.out.println("------------------------------------");
+                System.out.print("Amount:");
                 double amount2 = scn1.nextDouble();
-                act.withdrawMoney(acc,amount2);
-                break;
-            default :
-                System.out.println("Wrong!");
-                break;
+                act.withdrawMoney(acc, amount2);
+
+                accountSummary(acc,db);
+            }
+            case 3 -> {
+                System.out.println();
+                System.out.println("------------------------------------");
+                System.out.println("Please Username of account that you want to transfer money");
+                System.out.print("Username:");
+                String transferUsername = scn1.next();
+                System.out.println("------------------------------------");
+                System.out.println("Please enter transfer amount");
+                System.out.print("Amount:");
+                double amount3 = scn1.nextDouble();
+
+                Customer tempTransferAccount = new Customer();
+                int resultIndex = tempTransferAccount.getAccountIndexByUsername(transferUsername,db);
+
+                Customer transferAccount = db.instance.get(resultIndex);
+                act.transferMoney(acc,transferAccount,amount3);
+
+                accountSummary(acc,db);
+            }
+            case 4 ->{
+                System.out.println("------------------------------------");
+                System.out.println("       -----  --------  -----      ");
+                System.out.println("       -----  GOOD BYE  -----      ");
+                System.out.println("       -----  --------  -----      ");
+                System.out.println("------------------------------------");
+            }
+            default -> {
+                System.out.println("Please select a valid menu item");
+                accountSummary(acc,db);
+            }
         }
+
     }
 
     public Customer createAccount(Database cuss1){
@@ -81,7 +137,7 @@ public class Menu {
         String id = scn1.nextLine();
         System.out.println("Please enter a Password");
         String pw = scn1.nextLine();
-        System.out.println("Please select amount to deposit");
+        System.out.println("Please enter amount to deposit");
         Double amount = scn1.nextDouble();
 
         Customer cus = new Customer();
@@ -89,7 +145,7 @@ public class Menu {
 
         if (result.customerID == null){
 
-            System.out.println("Already exist username");
+            System.out.println("This Username already exists");
             return null;
 
         } else {

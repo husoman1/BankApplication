@@ -38,12 +38,13 @@ public class Account {
     }
 
     public boolean getCredentials(){
-        System.out.println("Customer ID Please");
+        System.out.println("------------------------------------");
+        System.out.println("Username: ");
         Scanner scn1 = new Scanner(System.in);
-        String input1 = scn1.nextLine();
-        System.out.println("Customer PW Please");
-        String input2 = scn1.nextLine();
-        return loginAccount(input1,input2);
+        String username = scn1.nextLine();
+        System.out.println("Password: ");
+        String password = scn1.nextLine();
+        return loginAccount(username,password);
     }
 
     public boolean createAccount(String id,String pw,Double amount){
