@@ -19,12 +19,14 @@ public class Main {
 
     public static void main(String[] args) {
 
-        ArrayList<Customer> acc1 =processJSON(); // Process InputJSON as DB
+        List<Customer> acc1 =processJSON(); // Process InputJSON as DB
+            // make this list
+
 
         int input1 = initApp(); //APP Menu init
         appFlow(input1,acc1); // APP init
     }
-    public static ArrayList<Customer> processJSON(){
+    public static List<Customer> processJSON(){
         ObjectMapper mapper = new ObjectMapper();
         try {
         return mapper.readValue(new File("src/main/java/org/example/inputJSON"), mapper.getTypeFactory().constructCollectionType(List.class, Customer.class));
@@ -42,8 +44,10 @@ public class Main {
 
     }
 
-    public static void appFlow(int input1,ArrayList<Customer> acc1){
+    public static void appFlow(int input1,List<Customer> acc1){
         Menu menu = new Menu();
+        //Daha açıklayıcı isimlendirme
+        //interface
         switch(input1) {
             case 1 :
                 Customer cus = new Customer();

@@ -5,10 +5,11 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class JSON {
 
-    public void prepareOutJSON(ArrayList<Customer> cus){
+    public void prepareOutJSON(List<Customer> cus){
         ObjectMapper objectMapper = new ObjectMapper();
 
         objectMapper.enable(SerializationFeature.INDENT_OUTPUT);

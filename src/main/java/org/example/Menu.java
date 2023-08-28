@@ -1,6 +1,7 @@
 package org.example;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Menu {
@@ -37,7 +38,7 @@ public class Menu {
         }
     }
 
-    public Customer createAccount(ArrayList<Customer> cuss1){
+    public Customer createAccount(List<Customer> cuss1){
         Scanner scn1 = new Scanner(System.in);
         System.out.println("Please enter an ID");
         String id = scn1.nextLine();

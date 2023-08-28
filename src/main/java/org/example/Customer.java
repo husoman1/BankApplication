@@ -1,13 +1,11 @@
 package org.example;
 
 import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Objects;
-import java.util.Scanner;
+import java.util.*;
 
 public class Customer {
     String customerID;
+    // ID should be lower
 
     String customerPassword;
     Double sum;
@@ -55,7 +53,7 @@ public class Customer {
         this.surname = surname;
     }
 
-    public int getCredentials(ArrayList<Customer> cust1){
+    public int getCredentials(List<Customer> cust1){
         System.out.println("Customer ID Please");
         Scanner scn1 = new Scanner(System.in);
         String input1 = scn1.nextLine();
@@ -64,7 +62,7 @@ public class Customer {
         return loginAccount(input1,input2, cust1);
     }
 
-    public int loginAccount(String ID,String customerPW, ArrayList<Customer> cust1){
+    public int loginAccount(String ID,String customerPW, List<Customer> cust1){
         for (int i = 0; i < cust1.size(); i++) {
             if (cust1.get(i).customerID.equals(ID) && cust1.get(i).customerPassword.equals(customerPW)){
                 this.customerID = cust1.get(i).customerID;
@@ -79,7 +77,7 @@ public class Customer {
         return -1;
     }
 
-    public Customer createAccount(String id,String pw,Double amount,ArrayList<Customer> cus){
+    public Customer createAccount(String id,String pw,Double amount,List<Customer> cus){
         for (int i = 0; i < cus.size(); i++) {
             if (cus.get(i).customerID.equals(id)){
                 return null;
